@@ -5,9 +5,9 @@ class Livro:
 
     def __init__(self, nome_livro: str, capitulo: int, autor: str, avaliacao: float, status: StatusLivro = StatusLivro.LENDO, id: int | None = None):
         self.__nome_livro = ""
-        self.__capitulo = None
-        self.__autor = None
-        self.__avaliacao = None
+        self.__capitulo = 1
+        self.__autor = ""
+        self.__avaliacao = 0.0
         self.__status = status
         self.__id = id
 
@@ -24,10 +24,10 @@ class Livro:
     @nome_livro.setter
     def nome_livro(self, valor_nome_livro: str):
 
-        if valor_nome_livro.strip():
+        if valor_nome_livro and valor_nome_livro.strip():
             self.__nome_livro = valor_nome_livro
-
-        raise ValueError(f"Não são aceitos livros com nome vazio!")
+        else:
+            raise ValueError(f"Não são aceitos livros com nome vazio!")
 
     @property
     def capitulo(self):
@@ -38,8 +38,8 @@ class Livro:
 
         if valor_capitulo >= 0:
             self.__capitulo = valor_capitulo
-
-        raise ValueError("Só são aceitos valores não negativos!")
+        else:
+            raise ValueError("Só são aceitos valores não negativos!")
 
     @property
     def autor(self):
@@ -48,10 +48,10 @@ class Livro:
     @autor.setter
     def autor(self, valor_autor:str):
 
-        if valor_autor.strip():
+        if valor_autor and valor_autor.strip():
             self.__autor = valor_autor
-
-        raise ValueError(f"Não são aceitos autores com nome vazio!")
+        else:
+            raise ValueError(f"Não são aceitos autores com nome vazio!")
 
     @property
     def avaliacao(self):
@@ -62,8 +62,8 @@ class Livro:
 
         if 0.0 <= valor_avaliacao <= 5.0:
             self.__avaliacao = valor_avaliacao
-
-        raise ValueError(f"Não foi possível avaliar. Valor '{valor_avaliacao}' deve estar entre 0 e 5!")
+        else:
+            raise ValueError(f"Não foi possível avaliar. Valor '{valor_avaliacao}' deve estar entre 0 e 5!")
 
     @property
     def status(self):
@@ -74,8 +74,8 @@ class Livro:
 
         if isinstance(valor_status, StatusLivro):
             self.__status = valor_status
-
-        raise ValueError(f"Status '{valor_status}' não é um status compatível!")
+        else:
+            raise ValueError(f"Status '{valor_status}' não é um status compatível!")
 
     @property
     def id(self):
